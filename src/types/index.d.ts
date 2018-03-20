@@ -1,3 +1,17 @@
+declare class Ethplorer {
+    constructor(apiKey?: string)
+    public getTokenInfo(address: string, params?: GenericParams): EthplorerResponse<TokenInfo>
+    public getAddressInfo(address: string, params?: GenericParams): EthplorerResponse<AddressInfo>
+    public getTxInfo(transactionHash: string, params?: GenericParams): EthplorerResponse<TransactionInfo>
+    public getTokenHistory(address: string, params?: TokenHistoryParams): EthplorerResponse<HistoryResponse>
+    public getAddressHistory(address: string, params?: AddressHistoryParams): EthplorerResponse<HistoryResponse>
+    public getAddressTransactions(address: string, params?: AddressTransactionParams): EthplorerResponse<AddressTransaction[]>
+    public getTop(params?: TopParams): EthplorerResponse<GetTopResponse>
+    public getTopTokens(params?: TopTokensParams): EthplorerResponse<GetTopTokensResponse>
+    public getTokenHistoryGrouped(address: string, params?: TokenHistoryGroupedParams): EthplorerResponse<GetHistoryGroupedResponse>
+    public getTokenPriceHistoryGrouped(address: string, params: TokenHistoryGroupedParams): EthplorerResponse<GetTokenPriceHistoryGroupedResponse>
+}
+
 
 type EthplorerError = {
     error: {
