@@ -1,7 +1,7 @@
 {
-    "name": "ethplorer",
+    "name": "ethplorer-js",
     "version": "0.0.1",
-    "description": "",
+    "description": "A promise based Nodejs library to interface with the Ethplorer API",
     "main": "/dist/index.js",
     "scripts": {
         "watch": "webpack --watch --progress -d",
