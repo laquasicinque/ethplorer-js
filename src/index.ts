@@ -1,25 +1,4 @@
 import axios, { AxiosResponse } from 'axios';
-import {
-    GenericParams,
-    EthplorerResponse,
-    TokenInfo,
-    AddressInfo,
-    TransactionInfo,
-    HistoryResponse,
-    TokenHistoryParams,
-    AddressHistoryParams,
-    AddressTransactionParams,
-    AddressTransaction,
-    TopParams,
-    GetTopResponse,
-    GetTopTokensResponse,
-    TopTokensParams,
-    TokenHistoryGroupedParams,
-    GetHistoryGroupedResponse,
-    GetTokenPriceHistoryGroupedResponse,
-    EthplorerParams,
-
-} from './types';
 
 export class Ethplorer {
     protected _baseUrl = "https://api.ethplorer.io";
@@ -106,5 +85,214 @@ export class Ethplorer {
         })
     }
 
-
 }
+
+/**
+ * Type Declarations
+ */
+
+export type EthplorerError = {
+    error: {
+        code: number,
+        message: string
+    }
+}
+
+export type TokenInfo = {
+    address: string,
+    totalSupply: string,
+    name: string,
+    symbol: string,
+    decimals: number,
+    price: {
+        rate: number,
+        currency: string,
+        diff: number,
+        ts: number,
+    } | false,
+    owner: string,
+    countOps?: number,
+    totalIn: number,
+    totalOut: number,
+    holdersCount: number,
+    issuancesCount: number
+}
+
+export type AddressInfo = {
+    address: string,
+    ETH: {
+        balance: number,
+        totalIn: number,
+        totalOut: number
+    },
+    contractInfo?: {
+        creatorAddress: string,
+        transactionHash: string,
+        timestamp: number
+    },
+    tokenInfo?: TokenInfo,
+    tokens?: TokenStruct[],
+    countTxs: number
+}
+
+export type TokenStruct = {
+    tokenInfo: TokenInfo,
+    balance: number,
+    totalIn: number,
+    totalOut: number
+}
+
+export type TransactionInfo = {
+    hash: string,
+    timestamp: number,
+    blockNumber: number,
+    comfirmations: number,
+    success: boolean,
+    form: string,
+    to: string,
+    value: number,
+    input: string,
+    gasLimit: number,
+    gasUsed: number,
+    logs: EthplorerEvent[],
+    operations: TokenHistory[],
+}
+
+export type EthplorerEvent = {
+    address: string,
+    topics: string[],
+    data: string,
+}
+
+export type TokenHistory = {
+    timestamp: number,
+    transactionHash: string,
+    value: string,
+    intValue: number,
+    type: string,
+    priority: number,
+    from: string,
+    to: string,
+    addresses?: string[],
+    address?: string,
+    tokenInfo: TokenInfo,
+}
+
+export type AddressTransaction = {
+    timestamp: number,
+    from: string,
+    to: string,
+    hash: string,
+    value: number,
+    input: string,
+    success: boolean
+}
+
+export type GroupedTokenHistory = {
+    _id: {
+        year: number,
+        month: number,
+        day: number,
+    },
+    ts: number,
+    cnt: number
+}
+
+export type GroupedTokenPriceHistory = {
+    ts: number,
+    date: string,
+    open: string,
+    close: string,
+    high: string,
+    low: string,
+    volume: string,
+    volumeConverted: string,
+    average: string
+}
+
+//TODO: volume stuff
+
+/** 
+ * Responses, only if they're different
+ */
+
+export type EthplorerResponse<T> = Promise<T | EthplorerError>
+
+export type HistoryResponse = {
+    operations: TokenHistory[]
+}
+
+export type GetTopResponse = {
+    tokens: (TokenInfo)[]
+}
+
+export type GetTopTokensResponse = {
+    tokens: (TokenInfo)[]
+}
+
+export type GetHistoryGroupedResponse = {
+    countTxs: GroupedTokenHistory[]
+}
+
+export type GetTokenPriceHistoryGroupedResponse = {
+    history: {
+        countTxs: GetHistoryGroupedResponse,
+        prices: GroupedTokenPriceHistory,
+        current?: boolean
+    }
+}
+
+/** 
+ * Parameters
+ */
+
+export type GenericParams = {
+    [name: string]: any,
+}
+
+export type EthplorerParams = {
+    apiKey: string
+} & GenericParams
+
+
+export type TokenHistoryParams = {
+    type?: string,
+    limit?: OneToTen,
+} & GenericParams
+
+export type AddressHistoryParams = {
+    token?: string,
+    type?: string,
+    limit?: OneToTen
+} & GenericParams
+
+export type AddressTransactionParams = {
+    limit?: OneToFifty,
+    showZeroValues?: 1 | 0
+} & GenericParams
+
+export type TopParams = {
+    criteria?: "trade", "cap", "count",
+    limit?: OneToFifty
+} & GenericParams
+
+export type TopTokensParams = {
+    period?: number,
+    limit?: OneToFifty
+} & GenericParams
+
+export type TokenHistoryGroupedParams = {
+    period?: number
+} & GenericParams
+
+
+/**
+ * Helper Types
+ */
+
+export type OneToTen = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
+export type ElevenToTwenty = 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20
+export type TwentyOneToThirty = 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30
+export type ThirtyOneToForty = 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40
+export type FortyOneToFifty = 41 | 42 | 43 | 44 | 45 | 46 | 47 | 48 | 49 | 50
+export type OneToFifty = OneToTen | ElevenToTwenty | TwentyOneToThirty | ThirtyOneToForty | FortyOneToFifty

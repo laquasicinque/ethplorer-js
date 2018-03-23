@@ -1,11 +1,11 @@
 {
     "compilerOptions": {
-        "outDir": "./dist/",
-        "sourceMap": true,
+        "outDir": "./dist",
         "strictNullChecks": true,
         "module": "commonjs",
         "target": "es6",
-        "allowJs": true,
+        "declaration": true,
+        "declarationDir": "./dist/types/",
         "baseUrl": ".",
         "paths": {
             "ethplorer-js": [
