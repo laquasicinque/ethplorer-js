@@ -1,4 +1,25 @@
 import axios, { AxiosResponse } from 'axios';
+import {
+    GenericParams,
+    EthplorerResponse,
+    TokenInfo,
+    AddressInfo,
+    TransactionInfo,
+    HistoryResponse,
+    TokenHistoryParams,
+    AddressHistoryParams,
+    AddressTransactionParams,
+    AddressTransaction,
+    TopParams,
+    GetTopResponse,
+    GetTopTokensResponse,
+    TopTokensParams,
+    TokenHistoryGroupedParams,
+    GetHistoryGroupedResponse,
+    GetTokenPriceHistoryGroupedResponse,
+    EthplorerParams,
+
+} from './types';
 
 export class Ethplorer {
     protected _baseUrl = "https://api.ethplorer.io";

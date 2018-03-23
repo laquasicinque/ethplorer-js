@@ -9,7 +9,7 @@
         "baseUrl": ".",
         "paths": {
             "ethplorer-js": [
-                "dist/"
+                "./dist/index.js"
             ],
         }
     },

@@ -5,9 +5,9 @@ A promise based Nodejs library to interface with the [Ethplorer](https://ethplor
 ##Usage
 Import the Libary:
 ```js
-import Ethplorer from 'ethplorer-js';
+import { Ethplorer } from 'ethplorer-js';
 // or
-let Ethplorer = require('ethplorer').default
+let Ethplorer = require('ethplorer-js').Ethplorer
 ```
 
 To initialize:

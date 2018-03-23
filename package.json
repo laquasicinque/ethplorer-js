@@ -2,7 +2,7 @@
     "name": "ethplorer-js",
     "version": "0.0.3",
     "description": "A promise based Nodejs library to interface with the Ethplorer API",
-    "main": "/dist/index.js",
+    "main": "./dist/index.js",
     "scripts": {
         "watch": "webpack --watch --progress -d",
         "build": "webpack --progress -d",
@@ -11,7 +11,8 @@
     "author": "Adam Xiaolong Dorling",
     "license": "ISC",
     "dependencies": {
-        "axios": "^0.18.0"
+        "axios": "^0.18.0",
+        "webpack-node-externals": "^1.6.0"
     },
     "devDependencies": {
         "@types/axios": "^0.14.0",
