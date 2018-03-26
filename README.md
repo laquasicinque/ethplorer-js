@@ -21,8 +21,9 @@ Then use any of the methods, described [here](https://github.com/EverexIO/Ethplo
 api.getTokenInfo(address)
     .then(data => {
     /*
-     data is the object returned by the api
-    */   
+     data is the object returned by the api,
+    */
+   
 })
 ```
 Any optional parameters can be passed as an optional argument. e.g
@@ -39,5 +40,41 @@ api.getTop({limit: 10})
 
 })
 ```
+## Errors
+The response object from the functions can be the [error object from the Ethplorer API](https://github.com/EverexIO/Ethplorer/wiki/Ethplorer-API#error-response), you can either handle it manually like so:
+```js
+api.getTokenInfo(address)
+.then(data => {
+    if("error" in data){
+        // handle the error object
+    }
+    else {
+        // ethplorer data returned from response
+    }
+})
+```
+Alternatively
+```js
+function handleEthplorerError(response){
+    if("error" in data){
+        throw data;
+    }
+    return data;
+}
 
-If you're using Typescript all requests and responses are fully typed according to the [Ethplorer API](https://github.com/EverexIO/Ethplorer/wiki/Ethplorer-API)
+api.getTokenInfo(address)
+.then(handleEthplorerError)
+.then(data => {
+
+})
+.catch(err => {
+    // the error here is either the axios error or the error object from ethplorer
+})
+```
+
+
+## Typescript
+
+If you're using Typescript all requests and responses are fully typed according to the [Ethplorer API](https://github.com/EverexIO/Ethplorer/wiki/Ethplorer-API). 
+
+**Note:** If you have any trouble with the typescript autocomplete from the response, you may need to check if the result is an error or not for typehinting to come back, as shown above.

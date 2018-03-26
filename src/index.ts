@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
+
 export class Ethplorer {
     protected _baseUrl = "https://api.ethplorer.io";
 
@@ -30,12 +31,12 @@ export class Ethplorer {
     }
 
     public async getTokenHistory(address: string, params?: TokenHistoryParams): EthplorerResponse<HistoryResponse> {
-        let response = await this._get(`getTxInfo/${address}`, params);
+        let response = await this._get(`getTokenHistory/${address}`, params);
         return response.data;
     }
 
     public async getAddressHistory(address: string, params?: AddressHistoryParams): EthplorerResponse<HistoryResponse> {
-        let response = await this._get(`getTxInfo/${address}`, params);
+        let response = await this._get(`getAddressHistory/${address}`, params);
 
         return response.data
     }
@@ -59,13 +60,13 @@ export class Ethplorer {
     }
 
     public async getTokenHistoryGrouped(address: string, params?: TokenHistoryGroupedParams): EthplorerResponse<GetHistoryGroupedResponse> {
-        let response = await this._get(`getTop`, params);
+        let response = await this._get(`getTokenHistoryGrouped`, params);
 
         return response.data;
     }
 
     public async getTokenPriceHistoryGrouped(address: string, params: TokenHistoryGroupedParams): EthplorerResponse<GetTokenPriceHistoryGroupedResponse> {
-        let response = await this._get(`getTop`, params);
+        let response = await this._get(`getTokenPriceHistoryGrouped`, params);
 
         return response.data
     }
@@ -115,7 +116,8 @@ export type TokenInfo = {
     totalIn: number,
     totalOut: number,
     holdersCount: number,
-    issuancesCount: number
+    issuancesCount: number,
+    [name: string]: any
 }
 
 export type AddressInfo = {
@@ -132,14 +134,16 @@ export type AddressInfo = {
     },
     tokenInfo?: TokenInfo,
     tokens?: TokenStruct[],
-    countTxs: number
+    countTxs: number,
+    [name: string]: any
 }
 
 export type TokenStruct = {
     tokenInfo: TokenInfo,
     balance: number,
     totalIn: number,
-    totalOut: number
+    totalOut: number,
+    [name: string]: any
 }
 
 export type TransactionInfo = {
@@ -156,12 +160,14 @@ export type TransactionInfo = {
     gasUsed: number,
     logs: EthplorerEvent[],
     operations: TokenHistory[],
+    [name: string]: any
 }
 
 export type EthplorerEvent = {
     address: string,
     topics: string[],
     data: string,
+    [name: string]: any
 }
 
 export type TokenHistory = {
@@ -176,6 +182,7 @@ export type TokenHistory = {
     addresses?: string[],
     address?: string,
     tokenInfo: TokenInfo,
+    [name: string]: any
 }
 
 export type AddressTransaction = {
@@ -185,7 +192,8 @@ export type AddressTransaction = {
     hash: string,
     value: number,
     input: string,
-    success: boolean
+    success: boolean,
+    [name: string]: any
 }
 
 export type GroupedTokenHistory = {
@@ -195,7 +203,8 @@ export type GroupedTokenHistory = {
         day: number,
     },
     ts: number,
-    cnt: number
+    cnt: number,
+    [name: string]: any
 }
 
 export type GroupedTokenPriceHistory = {
@@ -207,7 +216,8 @@ export type GroupedTokenPriceHistory = {
     low: string,
     volume: string,
     volumeConverted: string,
-    average: string
+    average: string,
+    [name: string]: any
 }
 
 //TODO: volume stuff
@@ -219,19 +229,23 @@ export type GroupedTokenPriceHistory = {
 export type EthplorerResponse<T> = Promise<T | EthplorerError>
 
 export type HistoryResponse = {
-    operations: TokenHistory[]
+    operations: TokenHistory[],
+    [name: string]: any
 }
 
 export type GetTopResponse = {
-    tokens: (TokenInfo)[]
+    tokens: TokenInfo[],
+    [name: string]: any
 }
 
 export type GetTopTokensResponse = {
-    tokens: (TokenInfo)[]
+    tokens: TokenInfo[],
+    [name: string]: any
 }
 
 export type GetHistoryGroupedResponse = {
-    countTxs: GroupedTokenHistory[]
+    countTxs: GroupedTokenHistory[],
+    [name: string]: any
 }
 
 export type GetTokenPriceHistoryGroupedResponse = {
@@ -239,7 +253,8 @@ export type GetTokenPriceHistoryGroupedResponse = {
         countTxs: GetHistoryGroupedResponse,
         prices: GroupedTokenPriceHistory,
         current?: boolean
-    }
+    },
+    [name: string]: any
 }
 
 /** 
@@ -251,38 +266,45 @@ export type GenericParams = {
 }
 
 export type EthplorerParams = {
-    apiKey: string
+    apiKey: string,
+    [name: string]: any
 } & GenericParams
 
 
 export type TokenHistoryParams = {
     type?: string,
     limit?: OneToTen,
+    [name: string]: any
 } & GenericParams
 
 export type AddressHistoryParams = {
     token?: string,
     type?: string,
-    limit?: OneToTen
+    limit?: OneToTen,
+    [name: string]: any
 } & GenericParams
 
 export type AddressTransactionParams = {
     limit?: OneToFifty,
-    showZeroValues?: 1 | 0
+    showZeroValues?: 1 | 0,
+    [name: string]: any
 } & GenericParams
 
 export type TopParams = {
     criteria?: "trade", "cap", "count",
-    limit?: OneToFifty
+    limit?: OneToFifty,
+    [name: string]: any
 } & GenericParams
 
 export type TopTokensParams = {
     period?: number,
-    limit?: OneToFifty
+    limit?: OneToFifty,
+    [name: string]: any
 } & GenericParams
 
 export type TokenHistoryGroupedParams = {
-    period?: number
+    period?: number,
+    [name: string]: any
 } & GenericParams
 
 

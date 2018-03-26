@@ -39,6 +39,7 @@ export declare type TokenInfo = {
     totalOut: number;
     holdersCount: number;
     issuancesCount: number;
+    [name: string]: any;
 };
 export declare type AddressInfo = {
     address: string;
@@ -55,12 +56,14 @@ export declare type AddressInfo = {
     tokenInfo?: TokenInfo;
     tokens?: TokenStruct[];
     countTxs: number;
+    [name: string]: any;
 };
 export declare type TokenStruct = {
     tokenInfo: TokenInfo;
     balance: number;
     totalIn: number;
     totalOut: number;
+    [name: string]: any;
 };
 export declare type TransactionInfo = {
     hash: string;
@@ -76,11 +79,13 @@ export declare type TransactionInfo = {
     gasUsed: number;
     logs: EthplorerEvent[];
     operations: TokenHistory[];
+    [name: string]: any;
 };
 export declare type EthplorerEvent = {
     address: string;
     topics: string[];
     data: string;
+    [name: string]: any;
 };
 export declare type TokenHistory = {
     timestamp: number;
@@ -94,6 +99,7 @@ export declare type TokenHistory = {
     addresses?: string[];
     address?: string;
     tokenInfo: TokenInfo;
+    [name: string]: any;
 };
 export declare type AddressTransaction = {
     timestamp: number;
@@ -103,6 +109,7 @@ export declare type AddressTransaction = {
     value: number;
     input: string;
     success: boolean;
+    [name: string]: any;
 };
 export declare type GroupedTokenHistory = {
     _id: {
@@ -112,6 +119,7 @@ export declare type GroupedTokenHistory = {
     };
     ts: number;
     cnt: number;
+    [name: string]: any;
 };
 export declare type GroupedTokenPriceHistory = {
     ts: number;
@@ -123,19 +131,24 @@ export declare type GroupedTokenPriceHistory = {
     volume: string;
     volumeConverted: string;
     average: string;
+    [name: string]: any;
 };
 export declare type EthplorerResponse<T> = Promise<T | EthplorerError>;
 export declare type HistoryResponse = {
     operations: TokenHistory[];
+    [name: string]: any;
 };
 export declare type GetTopResponse = {
-    tokens: (TokenInfo)[];
+    tokens: TokenInfo[];
+    [name: string]: any;
 };
 export declare type GetTopTokensResponse = {
-    tokens: (TokenInfo)[];
+    tokens: TokenInfo[];
+    [name: string]: any;
 };
 export declare type GetHistoryGroupedResponse = {
     countTxs: GroupedTokenHistory[];
+    [name: string]: any;
 };
 export declare type GetTokenPriceHistoryGroupedResponse = {
     history: {
@@ -143,38 +156,46 @@ export declare type GetTokenPriceHistoryGroupedResponse = {
         prices: GroupedTokenPriceHistory;
         current?: boolean;
     };
+    [name: string]: any;
 };
 export declare type GenericParams = {
     [name: string]: any;
 };
 export declare type EthplorerParams = {
     apiKey: string;
+    [name: string]: any;
 } & GenericParams;
 export declare type TokenHistoryParams = {
     type?: string;
     limit?: OneToTen;
+    [name: string]: any;
 } & GenericParams;
 export declare type AddressHistoryParams = {
     token?: string;
     type?: string;
     limit?: OneToTen;
+    [name: string]: any;
 } & GenericParams;
 export declare type AddressTransactionParams = {
     limit?: OneToFifty;
     showZeroValues?: 1 | 0;
+    [name: string]: any;
 } & GenericParams;
 export declare type TopParams = {
     criteria?: "trade";
     "cap";
     "count";
     limit?: OneToFifty;
+    [name: string]: any;
 } & GenericParams;
 export declare type TopTokensParams = {
     period?: number;
     limit?: OneToFifty;
+    [name: string]: any;
 } & GenericParams;
 export declare type TokenHistoryGroupedParams = {
     period?: number;
+    [name: string]: any;
 } & GenericParams;
 export declare type OneToTen = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 export declare type ElevenToTwenty = 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;

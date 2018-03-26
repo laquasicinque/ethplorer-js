@@ -36,13 +36,13 @@ class Ethplorer {
     }
     getTokenHistory(address, params) {
         return __awaiter(this, void 0, void 0, function* () {
-            let response = yield this._get(`getTxInfo/${address}`, params);
+            let response = yield this._get(`getTokenHistory/${address}`, params);
             return response.data;
         });
     }
     getAddressHistory(address, params) {
         return __awaiter(this, void 0, void 0, function* () {
-            let response = yield this._get(`getTxInfo/${address}`, params);
+            let response = yield this._get(`getAddressHistory/${address}`, params);
             return response.data;
         });
     }
@@ -66,13 +66,13 @@ class Ethplorer {
     }
     getTokenHistoryGrouped(address, params) {
         return __awaiter(this, void 0, void 0, function* () {
-            let response = yield this._get(`getTop`, params);
+            let response = yield this._get(`getTokenHistoryGrouped`, params);
             return response.data;
         });
     }
     getTokenPriceHistoryGrouped(address, params) {
         return __awaiter(this, void 0, void 0, function* () {
-            let response = yield this._get(`getTop`, params);
+            let response = yield this._get(`getTokenPriceHistoryGrouped`, params);
             return response.data;
         });
     }
