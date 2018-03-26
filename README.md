@@ -23,7 +23,6 @@ api.getTokenInfo(address)
     /*
      data is the object returned by the api,
     */
-   
 })
 ```
 Any optional parameters can be passed as an optional argument. e.g
