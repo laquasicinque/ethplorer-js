@@ -1,8 +1,8 @@
-#ethplorer-js
+# ethplorer-js
 
 A promise based Nodejs library to interface with the [Ethplorer](https://ethplorer.io/) API
 
-##Usage
+## Usage
 Import the Libary:
 ```js
 import { Ethplorer } from 'ethplorer-js';
